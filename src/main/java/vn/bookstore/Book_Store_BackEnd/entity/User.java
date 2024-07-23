@@ -28,7 +28,7 @@ public class User {
     private String phone;
     @Column(name = "purchase_address")
     private String purchaseAddress;
-    @Column(name = "devivery_address")
+    @Column(name = "delivery_address")
     private String deliveryAddress;
     @OneToMany(
             mappedBy = "user",
