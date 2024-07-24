@@ -17,7 +17,7 @@ public class Picture {
     private boolean isIcon;
     @Column(name = "picture_link")
     private String pictureLink;
-    @Column(name = "picture_data")
+    @Column(name = "picture_data", columnDefinition = "LONGTEXT")
     @Lob
     private String pictureData;
     @ManyToOne(

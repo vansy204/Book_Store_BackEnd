@@ -12,7 +12,7 @@ import vn.bookstore.Book_Store_BackEnd.entity.Category;
 
 @Configuration
 public class MethodRestConfig implements RepositoryRestConfigurer {
-    private String url = "http://localhost:8080";
+    private String url = "http://localhost:3000";
     @Autowired
     private EntityManager entityManager;
     @Override
@@ -23,6 +23,10 @@ public class MethodRestConfig implements RepositoryRestConfigurer {
                 HttpMethod.PATCH,
                 HttpMethod.POST
         };
+        cors.addMapping("/**")
+                .allowedOrigins(url)
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
+
         //export ids
         config.exposeIdsFor(entityManager.getMetamodel().getEntities().stream().map(Type::getJavaType).toArray(Class[]::new));
        // disableHttpMethod(Category.class,config,disablieMethods);
