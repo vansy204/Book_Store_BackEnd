@@ -31,9 +31,5 @@ public class MethodRestConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(entityManager.getMetamodel().getEntities().stream().map(Type::getJavaType).toArray(Class[]::new));
        // disableHttpMethod(Category.class,config,disablieMethods);
     }
-    private void disableHttpMethod(Class c, RepositoryRestConfiguration config, HttpMethod[] methods) {
-        config.getExposureConfiguration().forDomainType(c)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(methods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(methods));
-    }
+//
 }
