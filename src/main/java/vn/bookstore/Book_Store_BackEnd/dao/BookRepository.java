@@ -10,4 +10,6 @@ import vn.bookstore.Book_Store_BackEnd.entity.Book;
 @RepositoryRestResource(path = "book")
 public interface BookRepository extends JpaRepository<Book, Integer> {
     Page<Book> findByBookNameContaining(@RequestParam("bookName") String bookName, Pageable pageable);
+    Page<Book> findByCategories_categoryId(@RequestParam("categoryId") int categoryId, Pageable pageable);
+    Page<Book> findByBookNameContainingAndCategories_categoryId(@RequestParam("bookName") String bookName,@RequestParam("categoryId") int categoryId, Pageable pageable);
 }
