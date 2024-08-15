@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 import vn.bookstore.Book_Store_BackEnd.entity.Role;
 @RepositoryRestResource (path = "role")
 public interface RoleRepository extends JpaRepository<Role, Integer> {
+    public Role findByRoleName(String name);
 }
