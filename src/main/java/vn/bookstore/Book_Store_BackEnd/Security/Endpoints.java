@@ -7,8 +7,8 @@ public class Endpoints {
             "/book/**",
             "/picture",
             "/picture/**",
-            "/user/search/exitstByUserName",
-            "/user/search/exitstByEmail",
+            "/user/search/existsByUserName",
+            "/user/search/existsByEmail",
     };
     public static final String[] PUBLIC_POST_ENDPOINTS = {
         "/api/account/dang-ky"
