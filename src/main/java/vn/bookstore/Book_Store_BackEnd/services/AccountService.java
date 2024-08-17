@@ -52,6 +52,25 @@ public class AccountService {
     private void guiEmailKichHoat(String email,String activateCode){
         String subject = "Kich hoat tai khoan cua ban tai WebBanSach";
         String text = "vui long su dung ma sau de kich hoat cho tai khoan <" + email  +">: <html><body><br/> <h1>" + activateCode +"</h1></body></html>";
+        text+= "<br/> click vao duong link de kich hoat tai khoan";
+        String url = "http://localhost:3000/kich-hoat/" +email +"/" +activateCode;
+        text+= "<br/> <a href="+ url + ">"+ url +"</a>";
         emailService.sendEmail("phamvansy204@gmail.com", email, subject, text);
+    }
+    public ResponseEntity<?> activateAccount(String email, String activateCode) {
+        User user = userRepository.findByEmail(email);
+        if(user == null){
+            return ResponseEntity.badRequest().body(new ErrorResponse("User not found"));
+        }
+        if(user.isActivated()){
+            return ResponseEntity.badRequest().body(new ErrorResponse("User is already activated"));
+        }
+        if(activateCode.equals(user.getActivateCode())){
+            user.setActivated(true);
+            userRepository.save(user);
+            return ResponseEntity.ok("Kich hoat tai khoan thanh cong");
+        }else{
+            return ResponseEntity.badRequest().body(new ErrorResponse("ma kich hoat khong chinh xac"));
+        }
     }
 }
