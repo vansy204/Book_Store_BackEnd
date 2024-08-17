@@ -30,6 +30,10 @@ public class User {
     private String purchaseAddress;
     @Column(name = "delivery_address")
     private String deliveryAddress;
+    @Column(name = "activated")
+    private boolean activated;
+    @Column(name = "activate_code")
+    private String activateCode;
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY,

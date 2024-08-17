@@ -7,11 +7,12 @@ public class Endpoints {
             "/book/**",
             "/picture",
             "/picture/**",
-            "/user/search/exitstByUserName",
-            "/user/search/exitstByEmail",
+            "/user/search/existsByUserName",
+            "/user/search/existsByEmail",
+            "/api/account/kich-hoat",
     };
     public static final String[] PUBLIC_POST_ENDPOINTS = {
-        "/api/account/dang-ky"
+        "/api/account/dang-ky",
     };
     public static final String[] ADMIN_GET_ENDPOINTS = {
             "/user",

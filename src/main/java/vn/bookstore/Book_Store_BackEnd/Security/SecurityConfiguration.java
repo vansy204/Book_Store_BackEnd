@@ -36,14 +36,14 @@ public class SecurityConfiguration {
                 config -> config
                         .requestMatchers(HttpMethod.GET, Endpoints.PUBLIC_GET_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.POST, Endpoints.PUBLIC_POST_ENDPOINTS).permitAll()
-                        .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINTS).hasAnyAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINTS).hasAuthority("ADMIN")
         );
         http.cors(cors ->{
             cors.configurationSource(request -> {
                 CorsConfiguration corsConfig = new CorsConfiguration();
                 corsConfig.addAllowedOrigin(Endpoints.front_end_host);
                 corsConfig.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
-                corsConfig.addAllowedMethod("*");
+                corsConfig.addAllowedHeader("*");
                 return corsConfig;
             });
         });

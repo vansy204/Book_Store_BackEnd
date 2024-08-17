@@ -8,15 +8,22 @@ import vn.bookstore.Book_Store_BackEnd.entity.User;
 import vn.bookstore.Book_Store_BackEnd.services.AccountService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/account")
 public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @CrossOrigin(origins = "http://localhost:3000") // cho phep truy cap
+     // cho phep truy cap
     @PostMapping("/dang-ky")
     public ResponseEntity <?> dangKyNguoiDung( @Validated @RequestBody  User user){
         ResponseEntity<?> response = accountService.registryUser(user);
+        return response;
+    }
+
+    @GetMapping("/kich-hoat")
+    public ResponseEntity <?> kichHoatTaiKhoan( @RequestParam  String email,@RequestParam  String activateCode){
+        ResponseEntity<?> response = accountService.activateAccount(email,activateCode);
         return response;
     }
 }
