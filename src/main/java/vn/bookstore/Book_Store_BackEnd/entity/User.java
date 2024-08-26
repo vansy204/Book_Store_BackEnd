@@ -3,6 +3,7 @@ package vn.bookstore.Book_Store_BackEnd.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Blob;
 import java.util.List;
 @Data
 @Entity
@@ -34,6 +35,9 @@ public class User {
     private boolean activated;
     @Column(name = "activate_code")
     private String activateCode;
+    @Column(name = "avatar",columnDefinition = "LONGTEXT")
+    @Lob
+    private String avatar;
     @OneToMany(
             mappedBy = "user",
             fetch = FetchType.LAZY,

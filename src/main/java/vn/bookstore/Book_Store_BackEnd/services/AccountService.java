@@ -1,17 +1,17 @@
 package vn.bookstore.Book_Store_BackEnd.services;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import vn.bookstore.Book_Store_BackEnd.dao.UserRepository;
 import vn.bookstore.Book_Store_BackEnd.entity.ErrorResponse;
 import vn.bookstore.Book_Store_BackEnd.entity.User;
 
-import java.util.UUID;
-
 @Service
+
 public class AccountService {
     @Autowired
     private UserRepository userRepository;

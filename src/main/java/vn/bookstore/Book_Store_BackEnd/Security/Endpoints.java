@@ -12,10 +12,14 @@ public class Endpoints {
             "/api/account/kich-hoat",
     };
     public static final String[] PUBLIC_POST_ENDPOINTS = {
-        "/api/account/dang-ky",
+            "/api/account/dang-ky",
+            "/api/account/dang-nhap",
     };
     public static final String[] ADMIN_GET_ENDPOINTS = {
             "/user",
             "/user/**"
+    };
+    public static final String[] ADMIN_POST_ENDPOINTS = {
+           "/book/**"
     };
 }

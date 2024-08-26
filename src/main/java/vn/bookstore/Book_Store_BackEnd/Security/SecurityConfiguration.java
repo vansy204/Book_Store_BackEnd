@@ -8,15 +8,18 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import vn.bookstore.Book_Store_BackEnd.filter.JwtFilter;
 import vn.bookstore.Book_Store_BackEnd.services.UserService;
-
 import java.util.Arrays;
-
 @Configuration
 public class SecurityConfiguration {
+    @Autowired
+    private JwtFilter authFilter;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -37,6 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, Endpoints.PUBLIC_GET_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.POST, Endpoints.PUBLIC_POST_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.GET, Endpoints.ADMIN_GET_ENDPOINTS).hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, Endpoints.ADMIN_POST_ENDPOINTS).hasAuthority("ADMIN")
         );
         http.cors(cors ->{
             cors.configurationSource(request -> {
@@ -46,6 +50,10 @@ public class SecurityConfiguration {
                 corsConfig.addAllowedHeader("*");
                 return corsConfig;
             });
+        });
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+        http.sessionManagement((session) -> {
+            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
         http.httpBasic(Customizer.withDefaults());
         http.csrf(csrf-> csrf.disable());
